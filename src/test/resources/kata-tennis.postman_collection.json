@@ -1,0 +1,101 @@
+{
+	"info": {
+		"name": "kata-tennis",
+		"_postman_id": "68a8ab2a-3500-8576-d7d9-1cd75c3c9715",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "init a game",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"player1\": \"Nadal\",\n\t\"player2\": \"Federer\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/game",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Score a point",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"player1\": \"Nadal\",\n\t\"player2\": \"Federer\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/game/60781a2899e7366200b6b9c8/score/PLAYER2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game",
+						"60781a2899e7366200b6b9c8",
+						"score",
+						"PLAYER2"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get Game status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"player1\": \"Nadal\",\n\t\"player2\": \"Federer\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/game/60781a2899e7366200b6b9c8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game",
+						"60781a2899e7366200b6b9c8"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
