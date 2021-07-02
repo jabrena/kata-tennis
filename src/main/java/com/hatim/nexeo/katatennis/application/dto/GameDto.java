@@ -9,15 +9,12 @@ import lombok.NonNull;
 @Builder
 @EqualsAndHashCode
 @JsonRootName("Game")
+@Getter
 public class GameDto {
 
   @NonNull
-  @Getter private String player1;
-
+  private String player1;
   @NonNull
-  @Getter private String player2;
-
-  @Getter private MatchDto match;
-
-
+  private String player2;
+  private MatchDto match;
 }

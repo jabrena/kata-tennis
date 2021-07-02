@@ -68,7 +68,7 @@ public class GameMapper {
                     .gameSetPlayer1(domain.getGameSetPlayer1())
                     .gameSetPlayer2(domain.getGameSetPlayer2())
                     .build())
-        .collect(Collectors.toList());
+        .collect(Collectors.toUnmodifiableList());
   }
 
   private static List<GameSet> toDomain(MatchDto match) {
@@ -85,6 +85,6 @@ public class GameMapper {
                     .gameSetPlayer1(api.getGameSetPlayer1())
                     .gameSetPlayer2(api.getGameSetPlayer2())
                     .build())
-        .collect(Collectors.toList());
+        .collect(Collectors.toUnmodifiableList());
   }
 }

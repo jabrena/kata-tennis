@@ -1,4 +1,4 @@
-package com.hatim.nexeo.katatennis.infrastructure.gateway;
+package com.hatim.nexeo.katatennis.domain.service;
 
 import com.hatim.nexeo.katatennis.domain.model.Game;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

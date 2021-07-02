@@ -8,8 +8,9 @@ import lombok.Getter;
 @Builder
 @EqualsAndHashCode
 @JsonRootName("Set")
+@Getter
 public class GameSetDto {
-  @Getter private int gameSetPlayer1;
 
-  @Getter private int gameSetPlayer2;
+  private int gameSetPlayer1;
+  private int gameSetPlayer2;
 }

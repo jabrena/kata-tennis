@@ -12,31 +12,16 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @Document(collection = "game")
+@Getter
+@Setter
 public class Game {
 
     @Id
-    @Getter
-    @Setter
     private String id;
-
-    @Getter
     private String player1;
-
-    @Getter
     private String player2;
-
-    @Getter
-    @Setter
     private int currentGamePlayer1;
-
-    @Getter
-    @Setter
     private int currentGamePlayer2;
-
-    @Getter
     private List<GameSet> gameSets;
-
-    @Getter
-    @Setter
     private String matchStatus;
 }

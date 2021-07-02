@@ -10,14 +10,11 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @JsonRootName("Score")
+@Getter
 public class MatchDto {
 
-  @Getter private int currentGamePlayer1;
-
-  @Getter private int currentGamePlayer2;
-
-  @Getter private List<GameSetDto> gameSets;
-
-  @Getter private String matchStatus;
-
+  private int currentGamePlayer1;
+  private int currentGamePlayer2;
+  private List<GameSetDto> gameSets;
+  private String matchStatus;
 }

@@ -2,6 +2,7 @@ package com.hatim.nexeo.katatennis.infrastructure.gateway;
 
 import com.hatim.nexeo.katatennis.application.spi.GameRepository;
 import com.hatim.nexeo.katatennis.domain.model.Game;
+import com.hatim.nexeo.katatennis.domain.service.GameRepositoryH2;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 

@@ -5,6 +5,7 @@ import com.hatim.nexeo.katatennis.domain.model.PlayerEnum;
 import reactor.core.publisher.Mono;
 
 public interface GameService {
+
      /**
       * Init a new game with players name and scores to zero
       * @param initGameDto
