@@ -1,4 +1,4 @@
-package com.hatim.nexeo.katatennis.resource;
+package com.hatim.nexeo.katatennis.infrastructure.resource;
 
 import com.hatim.nexeo.katatennis.application.GameService;
 import com.hatim.nexeo.katatennis.application.dto.GameDto;

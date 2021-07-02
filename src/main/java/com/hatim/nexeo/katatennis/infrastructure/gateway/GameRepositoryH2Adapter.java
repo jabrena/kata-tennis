@@ -1,4 +1,4 @@
-package com.hatim.nexeo.katatennis.gateway;
+package com.hatim.nexeo.katatennis.infrastructure.gateway;
 
 import com.hatim.nexeo.katatennis.application.spi.GameRepository;
 import com.hatim.nexeo.katatennis.domain.model.Game;

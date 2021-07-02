@@ -17,7 +17,7 @@ public class ArchitectureOnionTest {
                     .domainModels("..domain.model..")
                     .domainServices("..domain.service..")
                     .applicationServices("..application..")
-                    .adapter("Gateway", "..gateway..")
-                    .adapter("Resource", "..resource..");
+                    .adapter("Gateway", "..infrastructure.gateway..")
+                    .adapter("Resource", "..infrastructure.resource..");
 
 }
