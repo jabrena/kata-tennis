@@ -8,20 +8,16 @@ import com.hatim.nexeo.katatennis.application.exception.GameNotFound;
 import com.hatim.nexeo.katatennis.application.mapper.GameMapper;
 import com.hatim.nexeo.katatennis.application.spi.GameRepository;
 import com.hatim.nexeo.katatennis.domain.model.Game;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
 
-  private GameRepository gameRepository;
-
-  private ScoreGameService scoreGameService;
-
-  public GameServiceImpl(GameRepository gameRepository, ScoreGameService scoreGameService) {
-    this.gameRepository = gameRepository;
-    this.scoreGameService = scoreGameService;
-  }
+  private final GameRepository gameRepository;
+  private final ScoreGameService scoreGameService;
 
   @Override
   public Mono<String> createGame(GameDto initGameDto) {

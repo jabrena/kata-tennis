@@ -22,18 +22,15 @@ public class GameMapper {
       return null;
     }
 
-    MatchDto matchDto =
-        MatchDto.builder()
-            .currentGamePlayer1(game.getCurrentGamePlayer1())
-            .currentGamePlayer2(game.getCurrentGamePlayer2())
-            .gameSets(toAPI(game.getGameSets()))
-            .matchStatus(game.getMatchStatus())
-            .build();
-    return GameDto.builder()
-        .player1(game.getPlayer1())
-        .player2(game.getPlayer2())
-        .match(matchDto)
-        .build();
+    MatchDto matchDto = new MatchDto(
+            game.getCurrentGamePlayer1(),
+            game.getCurrentGamePlayer2(),
+            toAPI(game.getGameSets()),
+            game.getMatchStatus());
+    return new GameDto(
+        game.getPlayer1(),
+        game.getPlayer2(),
+        matchDto);
   }
 
   public static Game toDomain(GameDto gameDto) {
@@ -41,18 +38,26 @@ public class GameMapper {
     if (gameDto == null) {
       return null;
     }
-    Game.GameBuilder gameBuilder = Game.builder()
-            .player1(gameDto.getPlayer1())
-            .player2(gameDto.getPlayer2())
-            .gameSets(toDomain(gameDto.getMatch()));
-    if(gameDto.getMatch() != null){
-      gameBuilder.currentGamePlayer1(gameDto.getMatch().getCurrentGamePlayer1());
-      gameBuilder.currentGamePlayer2(gameDto.getMatch().getCurrentGamePlayer2());
+
+    if (gameDto.getMatch() != null) {
+      return new Game(
+              null,
+              gameDto.getPlayer1(),
+              gameDto.getPlayer2(),
+              gameDto.getMatch().getCurrentGamePlayer1(),
+              gameDto.getMatch().getCurrentGamePlayer2(),
+              toDomain(gameDto.getMatch()),
+              null);
     } else {
-      gameBuilder.currentGamePlayer1(0);
-      gameBuilder.currentGamePlayer2(0);
+      return new Game(
+              null,
+              gameDto.getPlayer1(),
+              gameDto.getPlayer2(),
+              0,
+              0,
+              toDomain(gameDto.getMatch()),
+              null);
     }
-    return gameBuilder.build();
   }
 
   private static List<GameSetDto> toAPI(List<GameSet> gameSets) {
@@ -63,11 +68,9 @@ public class GameMapper {
 
     return gameSets.stream()
         .map(
-            domain ->
-                GameSetDto.builder()
-                    .gameSetPlayer1(domain.getGameSetPlayer1())
-                    .gameSetPlayer2(domain.getGameSetPlayer2())
-                    .build())
+            domain -> new GameSetDto(
+                    domain.getGameSetPlayer1(),
+                    domain.getGameSetPlayer2()))
         .collect(Collectors.toUnmodifiableList());
   }
 
@@ -75,16 +78,12 @@ public class GameMapper {
 
     if (match == null) {
       // init new match
-      return List.of(GameSet.builder().gameSetPlayer1(0).gameSetPlayer2(0).build());
+      GameSet gameSet = new GameSet(null, 0,0);
+      return List.of(gameSet);
     }
 
     return match.getGameSets().stream()
-        .map(
-            api ->
-                GameSet.builder()
-                    .gameSetPlayer1(api.getGameSetPlayer1())
-                    .gameSetPlayer2(api.getGameSetPlayer2())
-                    .build())
+        .map(api -> new GameSet(null, api.getGameSetPlayer1(), api.getGameSetPlayer2()))
         .collect(Collectors.toUnmodifiableList());
   }
 }

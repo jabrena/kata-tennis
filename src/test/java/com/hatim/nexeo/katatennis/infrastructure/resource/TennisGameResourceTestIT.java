@@ -22,7 +22,7 @@ public class TennisGameResourceTestIT {
   @Test
   void should_create_new_game() {
 
-    GameDto initGameDto = GameDto.builder().player1("Nadal").player2("Federer").build();
+    GameDto initGameDto = new GameDto("Nadal", "Federer", null);
 
     this.webTestClient
         .post()

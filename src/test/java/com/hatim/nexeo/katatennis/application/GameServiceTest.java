@@ -34,7 +34,7 @@ public class GameServiceTest {
   @Test
   void createNewGame_playersSet_shouldCreateNewGame() {
 
-    GameDto initGameDto = GameDto.builder().player1("Nadal").player2("Federer").build();
+    GameDto initGameDto = new GameDto("Nadal", "Federer", null);
 
     String idGame = "1";
 
@@ -64,8 +64,9 @@ public class GameServiceTest {
     Mockito.when(this.gameRepository.persist(Mockito.any(Game.class))).thenReturn(Mono.empty());
 
     GameService gameService = new GameServiceImpl(gameRepository, scoreGameService);
-    Mono<String> createdGameId =
-        gameService.createGame(GameDto.builder().player1("Nadal").player2("Federer").build());
+
+    GameDto initGameDto = new GameDto("Nadal", "Federer", null);
+    Mono<String> createdGameId = gameService.createGame(initGameDto);
     StepVerifier.create(createdGameId).expectErrorMessage("Error creating new game").verify();
   }
 
@@ -75,7 +76,7 @@ public class GameServiceTest {
     String idGame = "1";
 
     List<GameSet> gameSets = new ArrayList<>();
-    gameSets.add(GameSet.builder().gameSetPlayer1(0).gameSetPlayer2(2).build());
+    gameSets.add(new GameSet(null, 0,2));
 
     Mono<Game> gameResult =
         Mono.just(
@@ -137,7 +138,7 @@ public class GameServiceTest {
         .thenReturn(gameResultDataBase);
 
     List<GameSet> gameSets = new ArrayList<>();
-    gameSets.add(GameSet.builder().gameSetPlayer1(0).gameSetPlayer2(4).build());
+    gameSets.add(new GameSet(null, 0, 4));
 
     Game gameResult =
         Game.builder()
@@ -163,17 +164,16 @@ public class GameServiceTest {
     assertNotNull(gameScore);
 
     List<GameSetDto> gameSetDtoList = new ArrayList<>();
-    gameSetDtoList.add(GameSetDto.builder().gameSetPlayer1(0).gameSetPlayer2(4).build());
+    gameSetDtoList.add(new GameSetDto(0, 4));
 
     MatchDto scorePlayer =
-        MatchDto.builder()
-            .gameSets(gameSetDtoList)
-            .currentGamePlayer1(1)
-            .currentGamePlayer2(0)
-            .build();
+            new MatchDto(
+                    1,
+                    0,
+                    gameSetDtoList,
+                    null);
 
-    GameDto expectedGame =
-        GameDto.builder().player1("Nadal").player2("Federer").match(scorePlayer).build();
+    GameDto expectedGame = new GameDto("Nadal", "Federer", scorePlayer);
 
     StepVerifier.create(gameScore).expectNext(expectedGame).expectComplete().verify();
   }

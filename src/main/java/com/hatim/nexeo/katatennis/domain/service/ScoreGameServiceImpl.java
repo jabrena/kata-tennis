@@ -64,7 +64,7 @@ public class ScoreGameServiceImpl implements ScoreGameService {
         game.setMatchStatus("Player1 wins");
       } else {
         // update match by adding new game Set
-        GameSet gameSet = GameSet.builder().gameSetPlayer1(0).gameSetPlayer2(0).build();
+        GameSet gameSet = new GameSet(null, 0,0);
         game.getGameSets().add(gameSet);
         // reinit current score for new set
         game.setCurrentGamePlayer1(0);
@@ -75,7 +75,7 @@ public class ScoreGameServiceImpl implements ScoreGameService {
         game.setMatchStatus("Player2 wins");
       } else {
         // update match by adding new game Set
-        GameSet gameSet = GameSet.builder().gameSetPlayer1(0).gameSetPlayer2(0).build();
+        GameSet gameSet = new GameSet(null, 0,0);
         game.getGameSets().add(gameSet);
         // reinit current score for new set
         game.setCurrentGamePlayer1(0);

@@ -23,8 +23,8 @@ class GameMapperTest {
   void toAPI_completeGame_shouldReturnGameAPI(){
 
     List<GameSet> gameSets = new ArrayList<>();
-    gameSets.add(GameSet.builder().gameSetPlayer1(4).gameSetPlayer2(6).build());
-    gameSets.add(GameSet.builder().gameSetPlayer1(2).gameSetPlayer2(5).build());
+    gameSets.add(new GameSet(null, 4,6));
+    gameSets.add(new GameSet(null, 2,5));
 
     Game gameInit =
             Game.builder().player1("Nadal").player2("Federer").currentGamePlayer1(1).currentGamePlayer2(3).gameSets(gameSets).build();
@@ -32,18 +32,13 @@ class GameMapperTest {
     GameDto resultGame = GameMapper.toAPI(gameInit);
 
     List<GameSetDto> gameSetDtoList = new ArrayList<>();
-    gameSetDtoList.add(GameSetDto.builder().gameSetPlayer1(4).gameSetPlayer2(6).build());
-    gameSetDtoList.add(GameSetDto.builder().gameSetPlayer1(2).gameSetPlayer2(5).build());
+    gameSetDtoList.add(new GameSetDto(4,6));
+    gameSetDtoList.add(new GameSetDto(2,5));
 
     MatchDto scorePlayer =
-            MatchDto.builder()
-                    .gameSets(gameSetDtoList)
-                    .currentGamePlayer1(1)
-                    .currentGamePlayer2(3)
-                    .build();
+            new MatchDto(1,3, gameSetDtoList, null);
 
-    GameDto expectedGame =
-            GameDto.builder().player1("Nadal").player2("Federer").match(scorePlayer).build();
+    GameDto expectedGame = new GameDto("Nadal","Federer",scorePlayer);
 
     assertEquals(expectedGame, resultGame);
 
@@ -58,15 +53,8 @@ class GameMapperTest {
 
     List<GameSetDto> gameSetDtoList = new ArrayList<>();
 
-    MatchDto scorePlayer =
-            MatchDto.builder()
-                    .gameSets(gameSetDtoList)
-                    .currentGamePlayer1(1)
-                    .currentGamePlayer2(3)
-                    .build();
-
-    GameDto expectedGame =
-            GameDto.builder().player1("Nadal").player2("Federer").match(scorePlayer).build();
+    MatchDto scorePlayer = new MatchDto(1,3, gameSetDtoList, null);
+    GameDto expectedGame = new GameDto("Nadal","Federer",scorePlayer);
 
     assertEquals(expectedGame, resultGame);
 
@@ -81,20 +69,14 @@ class GameMapperTest {
   void toDomain_completeGame_shouldReturnGameDomain(){
 
     List<GameSetDto> gameSetDtoList = new ArrayList<>();
-    gameSetDtoList.add(GameSetDto.builder().gameSetPlayer1(0).gameSetPlayer2(4).build());
+    gameSetDtoList.add(new GameSetDto(0,4));
 
-    MatchDto scorePlayer =
-            MatchDto.builder()
-                    .gameSets(gameSetDtoList)
-                    .currentGamePlayer1(1)
-                    .currentGamePlayer2(0)
-                    .build();
-
-    GameDto testGame =
-            GameDto.builder().player1("Nadal").player2("Federer").match(scorePlayer).build();
+    MatchDto scorePlayer = new MatchDto(1,0, gameSetDtoList, null);
+    GameDto testGame = new GameDto("Nadal","Federer",scorePlayer);
     Game resultGame = GameMapper.toDomain(testGame);
 
-    List<GameSet> expectedGameSet = List.of(GameSet.builder().gameSetPlayer1(0).gameSetPlayer2(4).build());
+    GameSet gameSet = new GameSet(null, 0,4);
+    List<GameSet> expectedGameSet = List.of(gameSet);
     Game expectedGame = Game.builder()
             .player1("Nadal").player2("Federer")
             .currentGamePlayer1(1).currentGamePlayer2(0)

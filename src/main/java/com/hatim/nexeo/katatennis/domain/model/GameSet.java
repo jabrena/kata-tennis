@@ -1,17 +1,12 @@
 package com.hatim.nexeo.katatennis.domain.model;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Builder
-@EqualsAndHashCode
 @Document(collection = "game_set")
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 public class GameSet {
 
   @Id

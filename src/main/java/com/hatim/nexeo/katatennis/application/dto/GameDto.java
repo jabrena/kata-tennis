@@ -1,15 +1,11 @@
 package com.hatim.nexeo.katatennis.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NonNull;
+import lombok.Value;
 
-@Builder
-@EqualsAndHashCode
 @JsonRootName("Game")
-@Getter
+@Value
 public class GameDto {
 
   @NonNull
